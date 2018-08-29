@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: restaureant-system
+  data:
+    mongodb:
+      database: restaureant-system-db
+      port: 27017
+      
