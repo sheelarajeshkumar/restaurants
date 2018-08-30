@@ -1,15 +1,20 @@
 FROM alpine:edge
 MAINTAINER vajirawke@gmail.com
-VOLUME ["/data/db"]
-
 RUN apk add openjdk8
-RUN apt-get update 
-RUN apt-get  install -y mongodb-org 
+ENTRYPOINT ["/usr/bin/java"]
 
-CMD ["mongod"]
-EXPOSE 27017
+
+
+
+RUN apk  add mongodb
+VOLUME ["/data/db"]
+EXPOSE 27017:27017
+EXPOSE 28017:28017
+
+CMD [ "mongod", "--bind_ip", "127.0.0.1" ]
 RUN mkdir /apps
 COPY ./target/RestaurantGeoSearch-0.0.1-SNAPSHOT.jar /apps/restaurant.jar
-CMD [java -jar restaurant.jar]
+CMD ["-jar", "/apps/restaurant.jar"]
+
 EXPOSE 8080
 
